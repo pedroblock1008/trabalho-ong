@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang='pt-BR'>
+<header>
+    <div class="Menu">
+        <nav>
+            <a href="contato.html">Nosso Contato</a>
+            <a href="sobre.html">Sobre Nós</a>
+            <a href="projetos.html">Nossos Projetos</a>
+            <a href="transparencia.html">Portal da Transparência</a>
+            <a href="cadastro.html">Quero Me Cadastrar</a>
+        </nav>
+    </div>
+
+    <head>
+        <meta charset='UTF-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Transparência | ONG Esperança Viva</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap");
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Titillium Web", sans-serif;
+            }
+
+            body {
+                background-color: #f5f6fa;
+                color: #333;
+                line-height: 1.6;
+            }
+
+
+            header {
+                background-color: #ffffff;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+                width: 100%;
+                top: 0;
+                z-index: 100;
+                transition: box-shadow 0.3s ease;
+
+                padding: 10px 40px;
+                text-align: center;
+            }
+
+
+            header.scrolled {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+
+
+            header h1 {
+                color: #1d3557;
+
+                font-size: 1.5rem;
+                margin: 0;
+            }
+
+
+            .Container {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px 40px;
+            }
+
+            .Menu nav {
+                display: flex;
+                gap: 25px;
+                justify-content: flex-start;
+            }
+
+            .Menu a {
+                text-decoration: none;
+                color: #333;
+                font-weight: 600;
+                padding: 6px 12px;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+            }
+
+            .Menu a:hover {
+                background-color: #f0f0f0;
+                transform: translateY(-1px);
+            }
+
+            .sociais {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .sociais button {
+                background-color: #ffffff;
+                border: 1px solid #e0e0e0;
+                border-radius: 10px;
+                cursor: pointer;
+                font-size: 1.2rem;
+                color: #333;
+                padding: 8px 10px;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+            }
+
+            .sociais button:hover {
+                background-color: #e63946;
+                color: #fff;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+            }
+
+
+            main {
+                max-width: 1080px;
+                margin: 40px auto;
+                padding: 20px;
+            }
+
+
+            main>header {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+
+            main>header h1 {
+                font-size: 2.2rem;
+                color: #e63946;
+
+                margin-bottom: 10px;
+            }
+
+            main>header p {
+                color: #555;
+                font-size: 1.1rem;
+            }
+
+
+            section {
+                margin-bottom: 60px;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 20px;
+            }
+
+            section h2 {
+                color: #1d3557;
+
+                margin-bottom: 15px;
+                font-size: 1.6rem;
+                border-left: 5px solid #e63946;
+                padding-left: 10px;
+
+                grid-column: 1 / -1;
+            }
+
+            .chart-container {
+                background: #fff;
+                padding: 20px;
+                border-radius: 12px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+                transition: transform 0.3s ease;
+            }
+
+            .chart-container h2 {
+
+                font-size: 1.4rem;
+                color: #1d3557;
+                border: none;
+                padding-left: 0;
+                margin-bottom: 15px;
+            }
+
+
+            canvas {
+                display: block;
+                margin: 0 auto;
+                background-color: #fff;
+                border-radius: 10px;
+
+            }
+
+            footer {
+                background-color: #ffffff;
+                padding: 20px;
+                text-align: center;
+                font-size: 0.9rem;
+                color: #555;
+                border-top: 1px solid #ddd;
+                box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03);
+            }
+
+            footer a {
+                color: #e63946;
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+            footer a:hover {
+                text-decoration: underline;
+            }
+
+            @media (max-width: 768px) {
+                .Container {
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 10px;
+                }
+
+                .Menu nav {
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+
+                .sociais {
+                    justify-content: center;
+                    margin-top: 10px;
+                }
+
+                main {
+                    padding: 10px;
+                }
+
+                section h2 {
+                    font-size: 1.3rem;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+
+
+        <h1>ONG Esperança Viva</h1>
+
+        <main>
+
+            <header>
+                <h1>Transparência Financeira</h1>
+                <p>Acreditamos na clareza. Veja como utilizamos nossos recursos.</p>
+            </header>
+
+
+            <section>
+
+                <div class="chart-container">
+                    <h2>Distribuição das Despesas Anuais (Fictício)</h2>
+                    <canvas id='graficoPizza'></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <h2>Evolução das Doações (Últimos 5 Anos)</h2>
+                    <canvas id='graficoLinha'></canvas>
+                </div>
+
+
+                <div class="chart-container">
+                    <h2>Origem das Receitas (Atual)</h2>
+                    <canvas id='graficoBarra'></canvas>
+                </div>
+
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 ONG Esperança Viva | <a href="#">Política de Privacidade</a></p>
+        </footer>
+
+        <script>
+
+            const PRIMARY_RED = '#e63946';
+            const DARK_BLUE = '#1d3557';
+            const MID_BLUE = '#457b9d';
+            const LIGHT_BLUE = '#a8dadc';
+
+
+            const dadosDespesas = {
+                labels: ['Projetos Sociais', 'Custos Administrativos', 'Captação de Recursos'],
+                datasets: [{
+                    data: [72, 18, 10],
+                    backgroundColor: [DARK_BLUE, PRIMARY_RED, MID_BLUE],
+                    hoverOffset: 10
+                }]
+            };
+
+            const dadosEvolucao = {
+                labels: ['2021', '2022', '2023', '2024', '2025 (Previsto)'],
+                datasets: [{
+                    label: 'Total Arrecadado (em mil R$)',
+                    data: [50, 85, 120, 150, 180],
+                    borderColor: PRIMARY_RED,
+                    backgroundColor: 'rgba(230, 57, 70, 0.1)',
+                    tension: 0.3,
+                    fill: true,
+                }]
+            };
+
+            const dadosOrigemReceitas = {
+                labels: ['Doações Individuais', 'Parcerias Corporativas', 'Eventos e Bazares', 'Recursos Governamentais'],
+                datasets: [{
+                    label: 'Receita (%)',
+                    data: [45, 30, 15, 10],
+                    backgroundColor: [
+                        PRIMARY_RED,
+                        DARK_BLUE,
+                        MID_BLUE,
+                        LIGHT_BLUE
+                    ],
+                    borderColor: 'white',
+                    borderWidth: 1
+                }]
+            };
+            function criarGraficoPizza() {
+                const ctx = document.getElementById('graficoPizza').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: dadosDespesas,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: {
+                                        family: "Titillium Web",
+                                    }
+                                }
+                            },
+                            title: {
+                                display: false,
+                            }
+                        }
+                    }
+                });
+            }
+            function criarGraficoLinha() {
+                const ctx = document.getElementById('graficoLinha').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: dadosEvolucao,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Valor (mil R$)',
+                                    font: { family: "Titillium Web" }
+                                },
+                                ticks: { font: { family: "Titillium Web" } }
+                            },
+                            x: {
+                                ticks: { font: { family: "Titillium Web" } }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: false,
+                            }
+                        }
+                    }
+                });
+            }
+            function criarGraficoBarra() {
+                const ctx = document.getElementById('graficoBarra').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: dadosOrigemReceitas,
+                    options: {
+                        responsive: true,
+                        indexAxis: 'y',
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: 'Percentual (%)',
+                                    font: { family: "Titillium Web" }
+                                },
+                                ticks: { font: { family: "Titillium Web" } }
+                            },
+                            y: {
+                                ticks: { font: { family: "Titillium Web" } }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: false,
+                            }
+                        }
+                    }
+                });
+            }
+            window.onload = function () {
+                criarGraficoPizza();
+                criarGraficoLinha();
+                criarGraficoBarra();
+            };
+
+        </script>
+    </body>
+
+</html>
