@@ -1,0 +1,4 @@
+Google Fonts recomendadas:
+- Inter: https://fonts.google.com/specimen/Inter
+- Roboto: https://fonts.google.com/specimen/Roboto
+- Open+Sans: https://fonts.google.com/specimen/Open+Sans
